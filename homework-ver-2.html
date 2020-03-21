@@ -27,6 +27,12 @@
 
     .picsize {
       width: 625px;
+
+    }
+
+    .orders {
+      margin-top: 50px;
+      width: 625px;
     }
 
     .wrap {
@@ -37,6 +43,47 @@
       margin: 10px auto 10px auto;
     }
   </style>
+  <script>
+    function getorder() {
+      let ordername = $('#username').val();
+      let ordercount = $('#count').val();
+      let orderadd = $('#address').val();
+      let ordertel = $('#tel').val();
+
+      if (ordername == '') {
+        alert('이름을 입력하세요!');
+        $('#username').focus();
+        return
+      } else if (ordercount == '') {
+        alert('수량을 입력하세요!');
+        $('#count').focus();
+        return
+      } else if (orderadd == '') {
+        alert('주소를 입력하세요!');
+        $('#address').focus();
+        return
+      } else if (ordertel == '') {
+        alert('전화번호를 입력하세요!');
+        $('#tel').focus(name, count, address, phone);
+        return
+      } else {
+        alert('주문 완료! 배송에는 약 한달 소요 됩니다!')
+        orderlistinfo()
+      }
+
+    }
+
+    function orderlistinfo(name, count, address, phone) {
+      let temp_html = '<tr>\
+            <td>' + name + '</td>\
+            <td>' + count + '</td>\
+            <td>' + address + '</td>\
+            <td>' + phone + '</td>\
+          </tr>';
+      $('#orders-box').append(temp_html);
+    }
+  </script>
+
 </head>
 
 <body>
@@ -111,7 +158,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">주문자 이름</span>
         </div>
-        <input type="text" class="form-control" placeholder="이름을 입력하세요" aria-label="Username"
+        <input id="username" type="text" class="form-control" placeholder="이름을 입력하세요" aria-label="Username"
           aria-describedby="basic-addon1" />
       </div>
       <div class="input-group mb-3">
@@ -119,7 +166,7 @@
           <label class="input-group-text" for="inputGroupSelect01">수량</label>
         </div>
 
-        <select class="custom-select" id="inputGroupSelect01">
+        <select id="count" class="custom-select">
           <option selected>갯수를 선택하세요</option>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -138,19 +185,42 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">주소</span>
         </div>
-        <input type="address" class="form-control" placeholder="주소를 입력하세요" aria-label="Address"
+        <input id="address" type="address" class="form-control" placeholder="주소를 입력하세요" aria-label="Address"
           aria-describedby="basic-addon1" />
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon1">전화번호</span>
         </div>
-        <input type="tel" class="form-control" placeholder="전화번호를 입력하세요" aria-label="Tel"
+        <input id="tel" type="tel" class="form-control" placeholder="전화번호를 입력하세요" aria-label="Tel"
           aria-describedby="basic-addon1" />
       </div>
     </div>
     <div class="order-button">
-      <button type="submit" class="btn btn-primary btn-lg">주문하기</button>
+      <button type="submit" class="btn btn-primary btn-lg" onclick="getorder()">주문하기</button>
+    </div>
+    <div class="orders">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">이름</th>
+            <th scope="col">수량</th>
+            <th scope="col">주소</th>
+            <th scope="col">전화번호</th>
+          </tr>
+        </thead>
+        <tbody id="orders-box">
+          <tr>
+            <td>테디정</td>
+            <td>2</td>
+            <td>서울시 강남구</td>
+            <td>010-9999-1111</td>
+          </tr>
+
+
+
+        </tbody>
+      </table>
     </div>
   </div>
 
